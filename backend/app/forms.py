@@ -10,3 +10,6 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ("text", )
         widgets = {'text': forms.Textarea(attrs={'cols': 80, 'rows': 5, "class": "form-control"})}
+
+class RemoveUser(forms.Form):
+    username = forms.CharField()

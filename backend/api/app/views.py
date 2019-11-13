@@ -45,31 +45,4 @@ class TweetsAll(APIView):
 #             return Response(status=200)
 #         else:
 #             return Response(status=400)
-#
-#
-# class Like(APIView):
-#     """Ставим лайк"""
-#     permission_classes = [permissions.IsAuthenticated]
-#
-#     def post(self, request):
-#         pk = request.data.get("pk")
-#         post = Post.objects.get(id=pk)
-#         if request.user in post.user_like.all():
-#             post.user_like.remove(User.objects.get(id=request.user.id))
-#             post.like -= 1
-#         else:
-#             post.user_like.add(User.objects.get(id=request.user.id))
-#             post.like += 1
-#         post.save()
-#         return Response(status=201)
-#
-# class UpdateTwits(APIView):
-#     permission_classes = [permissions.IsAuthenticated]
-#
-#     def post(self, request):
-#         prof = Post.objects.post(user = request.user)
-#         ser = EditTwit(prof, data=request.data)
-#         if ser.is_valid():
-#             ser.save()
-#
 

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import View,ListView
@@ -5,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from backend.app.models import Post
-from backend.app.forms import PostForm
+from backend.app.forms import PostForm, RemoveUser
 
 class AllTwit(ListView):
     # model = Post
@@ -43,6 +44,19 @@ class PostView(View):
             return redirect("posts")
         else:
             return HttpResponse("error")
+    @login_required(login_url='http://127.0.0.1:8000/')
+    def remove_user(request):
+        if request.method == 'POST':
+            form = RemoveUser(request.POST)
+            username = request.POST.get('username')
+            if form.is_valid():
+                rem = User.objects.get(username=username)
+                rem.delete()
+                return redirect('main')
+        else:
+            form = RemoveUser()
+        context = {'form': form}
+        return render(request, 'remove_user.html', context)
 
 
 class Like(LoginRequiredMixin, View):

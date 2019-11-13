@@ -33,18 +33,3 @@ class PostSerializer(serializers.ModelSerializer):
                   "like",
                   "user_like")
 #
-#
-# class AddTweetSerializer(serializers.ModelSerializer):
-#     """Добавление твита"""
-#     class Meta:
-#         model = Post
-#         fields = ("text", )
-#
-# class PostDetailSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Post
-#         fields = '__all__'
-# class EditTwit(serializers.ModelSerializer):
-#     class Meta:
-#         model = Post
-#         fields = ("text", )

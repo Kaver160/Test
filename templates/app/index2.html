@@ -24,6 +24,10 @@
                         <i class="fa fa-thumbs-o-up" aria-hidden="true" onclick="like({{ post.id }})"></i>
 {#                        <a href={% url 'update' %}>Редактировать</a>#}
                             <button type="submit" onclick="update({{ post.id }})">Редактировать запись</button>
+                            {% for like in post.like.all %}
+                                {{ like.user_like }}
+                                {{ like.date }}
+                            {% endfor %}
                     {% else %}
                         <a href="/accounts/login", data-toggle="modal" data-target="#loginModal">
                         <i class="fa fa-thumbs-o-up", aria-hidden="true"></i>
