@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -7,6 +8,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from backend.app.models import Post
 from backend.app.forms import PostForm, RemoveUser
+from backend.profiles.models import Profile
+from django.shortcuts import get_object_or_404
+
 
 class AllTwit(ListView):
     # model = Post
@@ -44,21 +48,6 @@ class PostView(View):
             return redirect("posts")
         else:
             return HttpResponse("error")
-    @login_required(login_url='http://127.0.0.1:8000/')
-    def remove_user(request):
-        if request.method == 'POST':
-            form = RemoveUser(request.POST)
-            username = request.POST.get('username')
-            if form.is_valid():
-                rem = User.objects.get(username=username)
-                rem.delete()
-                return redirect('main')
-        else:
-            form = RemoveUser()
-        context = {'form': form}
-        return render(request, 'remove_user.html', context)
-
-
 class Like(LoginRequiredMixin, View):
     """Ставим лайк"""
     def post(self, request):
@@ -72,9 +61,27 @@ class Like(LoginRequiredMixin, View):
             post.like += 1
         post.save()
         return HttpResponse(status=201)
+#
+# class Delete(View):
+#     def get(self, request):
+#             pk = request.POST.get("id")
+#             user = Profile.objects.get(pk='16')
+#             user.delete()
+        # try:
+        #     u = User.objects.get(username=user)
+        #     u.delete()
+        #     messages.success(request, "The user is deleted")
+        #
+        # except User.DoesNotExist:
+        #     messages.error(request, "User doesnot exist")
+        #     return render(request, 'front.html')
+        #
+        # except Exception as e:
+        #     return render(request, 'front.html', {'err': e.message})
+        #
+        # return render(request, 'front.html')
 
-# class UpdatePost(View):
-#     def post(self, request):
-#         pk = request.POST.get("pk")
-#         post = Post.objects.get(id=pk)
-#         return redirect('http://127.0.0.1:8000/api/v1/app/post/detail/'+ id +'/')
+
+
+
+

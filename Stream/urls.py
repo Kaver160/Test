@@ -12,7 +12,7 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('', include("backend.app.urls")),
-    # path('profile/', include("backend.profiles.urls")),
+    path('profile/', include("backend.profiles.urls")),
     path('my/api/v1/app/', include('backend.api.app.urls')),
     # path('api/v1/profile/', include('backend.api.profiles.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

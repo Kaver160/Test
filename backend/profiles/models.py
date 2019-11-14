@@ -8,7 +8,6 @@ class Profile(models.Model):
     """Модель профиля пользователя"""
 
     user = models.OneToOneField(User, verbose_name="Пользователь", on_delete=models.CASCADE)
-    nike = models.CharField("НикНейм", max_length=100, null=True, blank=True)
     avatar = models.ImageField("Аватар", upload_to="profile/", null=True, blank=True)
 
     class Meta:
@@ -16,7 +15,7 @@ class Profile(models.Model):
         verbose_name_plural = "Профили"
 
     def __str__(self):
-        return "{}".format(self.user)
+        return "{}""{}".format(self.user , self.id)
 
     @property
     def get_avatar_url(self):

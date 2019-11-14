@@ -24,6 +24,7 @@
                         <i class="fa fa-thumbs-o-up" aria-hidden="true" onclick="like({{ post.id }})"></i>
 {#                        <a href={% url 'update' %}>Редактировать</a>#}
                             <button type="submit" onclick="update({{ post.id }})">Редактировать запись</button>
+{#                            <a href ={% url 'del' %} >Удалить пользователя</a>#}
                             {% for like in post.like.all %}
                                 {{ like.user_like }}
                                 {{ like.date }}

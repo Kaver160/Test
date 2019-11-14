@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <p>Welcome to your profile,
+            {% if profile.nike %}
+                {{profile.nike}}
+            {% else %}
+                {{user}}
+            {% endif %}</p>
+        <hr>
+{#        <p>Your avatar:</p>#}
+{#        <button type="submit" onclick="ybrat({{ user.id }})">Удалить пользователя</button>#}
+    </div>
+</div>
+{% endblock %}
